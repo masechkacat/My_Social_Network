@@ -1,0 +1,35 @@
+//import reactLogo from './assets/react.svg'
+//import viteLogo from '/vite.svg'
+import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PrivateRoute from '../private-route/private-route';
+import { AppRoute} from '../../const';
+import HomeScreen from '../../pages/HomeScreen';
+import LoginScreen from '../../pages/LoginScreen';
+import RegisterScreen from '../../pages/RegisterScreen';
+import OfferScreen from '../../pages/OfferScreen';
+import NotFoundScreen from '../../pages/NotFoundScreen';
+import ProfileScreen from '../../pages/ProfileScreen';
+import Navbar from '../navbar/navbar';
+
+function App() {
+
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path={AppRoute.Home} element={<HomeScreen />} />
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route path={AppRoute.Register} element={<RegisterScreen />} />
+        <Route path={AppRoute.Profile} element={<PrivateRoute ><ProfileScreen /></PrivateRoute>} />
+        <Route
+          path={`${AppRoute.Offer}/:id`}
+          element={<OfferScreen />}
+        />
+        <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
