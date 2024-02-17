@@ -21,14 +21,22 @@ export const createAPI = () => {
   });
 
   api.interceptors.request.use((config) => {
-    // Пути, не требующие аутентификации
-    const publicPaths = ['/auth/local/register', '/auth/local', '/posts'];
-    const isPublicPath = publicPaths.some(path => config.url.includes(path));
+    // Пути и методы, не требующие аутентификации
+    const publicRequests = [
+      { method: 'get', path: '/posts' }, // Пример публичного GET запроса
+      { method: 'post', path: '/auth/local' }, // Пример публичного POST запроса
+      { method: 'post', path: '/auth/local/register' }, // Пример публичного POST запроса
+      // Можно добавить другие публичные запросы по аналогии
+    ];
   
-    if (!isPublicPath) {
+    const isPublicRequest = publicRequests.some(
+      (req) => config.url.endsWith(req.path) && config.method === req.method
+    );
+  
+    if (!isPublicRequest) {
       const token = getToken();
       if (token) {
-        console.log('token', token);
+        console.log('Adding JWT token to request:', token);
         config.headers['Authorization'] = `Bearer ${token}`;
       }
     }
@@ -36,6 +44,7 @@ export const createAPI = () => {
     config.headers['Content-Type'] = 'application/json';
     return config;
   });
+  
   
   api.interceptors.response.use(
     (response) => {

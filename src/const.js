@@ -3,12 +3,6 @@ export const AppRoute = {
   Login: '/login',
   Register: '/register',
   Profile: '/profile',
-  Offer: '/offer',
+  Posts: '/posts',
   NotFound: '/*',
-};
-
-export const AuthorizationStatus = {
-  Auth: 'AUTH',
-  NoAuth: 'NO_AUTH',
-  Unknown: 'UNKNOWN'
 };

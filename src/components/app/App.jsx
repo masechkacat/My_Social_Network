@@ -7,7 +7,7 @@ import { AppRoute} from '../../const';
 import HomeScreen from '../../pages/HomeScreen';
 import LoginScreen from '../../pages/LoginScreen';
 import RegisterScreen from '../../pages/RegisterScreen';
-import OfferScreen from '../../pages/OfferScreen';
+import PostsScreen from '../../pages/PostsScreen';
 import NotFoundScreen from '../../pages/NotFoundScreen';
 import ProfileScreen from '../../pages/ProfileScreen';
 import Navbar from '../navbar/navbar';
@@ -22,10 +22,7 @@ function App() {
         <Route path={AppRoute.Login} element={<LoginScreen />} />
         <Route path={AppRoute.Register} element={<RegisterScreen />} />
         <Route path={AppRoute.Profile} element={<PrivateRoute ><ProfileScreen /></PrivateRoute>} />
-        <Route
-          path={`${AppRoute.Offer}/:id`}
-          element={<OfferScreen />}
-        />
+        <Route path={AppRoute.Posts} element={<PrivateRoute ><PostsScreen /></PrivateRoute>}/>
         <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>
