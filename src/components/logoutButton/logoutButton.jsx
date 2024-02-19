@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppRoute } from "../../const";
 import { useDispatch } from 'react-redux';
 import { resetState } from '../../store/user/reducer';
+import { MdLogout } from "react-icons/md";
 
 function LogoutButton() {
   const dispatch = useDispatch();
@@ -15,7 +16,10 @@ function LogoutButton() {
   };
 
   return (
-    <button onClick={handleLogout}>LogOut</button>
+    <button onClick={handleLogout} className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+      <MdLogout className="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" onClick={handleLogout}>LogOut</MdLogout>
+      <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">LogOut</span>
+    </button>
   );
 }
 

@@ -17,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <div className="lg:pt-16">
       <Routes>
         <Route path={AppRoute.Home} element={<HomeScreen />} />
         <Route path={AppRoute.Login} element={<LoginScreen />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path={AppRoute.Posts} element={<PrivateRoute ><PostsScreen /></PrivateRoute>}/>
         <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
       </Routes>
+      </div>
     </BrowserRouter>
   )
 }

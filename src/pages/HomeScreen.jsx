@@ -1,17 +1,22 @@
 import { useSelector } from 'react-redux';
 import PostForm from '../components/postForm/postForm';
 import PostsScreen from './PostsScreen';
+import Jumbotron from '../components/jumbotron/jumbotron';
 
 function HomeScreen() {
   // Получаем состояние аутентификации из Redux store
-  const isAuthenticated = useSelector(state => !!state.user.token); // Пример, адаптируйте под ваш стейт
+  const token = useSelector((state) => state.user.token);
 
   return (
-    <div>
-      <h1>Главная страница</h1>
-      {isAuthenticated && <PostForm />}
+    <>
+      {token ?
+      (<>
+      <PostForm />
       <PostsScreen />
-    </div>
+      </>) : (
+      <Jumbotron />
+      )}
+    </>
   );
 }
 

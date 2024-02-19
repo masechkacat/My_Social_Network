@@ -6,9 +6,8 @@ export const createPost = createAsyncOperation({
   operation: async (postData) => {
     const api = createAPI();
     // Убедитесь, что данные передаются в правильном формате, который ожидается вашим API
-   
     console.log('postData from action:', postData);
-    return api.post('/posts', { data: postData });
+    return api.post('/posts?populate=user', { data: postData });
   },
 });
 

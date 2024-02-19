@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../store/post/action'; // Убедитесь, что путь к экшенам корректен
 import { fetchCurrentUser } from '../../store/user/actions'; // Убедитесь, что путь к экшенам корректен
+import { fetchPosts } from '../../store/post/action'; // Убедитесь, что путь к экшенам корректен
 
 function PostForm() {
   const [postContent, setPostContent] = useState('');
@@ -28,9 +29,11 @@ function PostForm() {
         user: userData.id // Передаем ID пользователя вместе с текстом поста
       };
       console.log('postData:', postData);
-      dispatch(createPost(postData)); // Диспатчим экшен создания поста
-      setPostContent(''); // Очистка поля ввода после отправки
-    }
+      dispatch(createPost(postData)).then(() => {
+        dispatch(fetchPosts()); // Повторный запрос списка постов
+      });
+      setPostContent('');
+      }
   };
 
   // Если userData или userData.id нет, то не отображаем форму создания поста
