@@ -16,9 +16,9 @@ function LogoutButton() {
   };
 
   return (
-    <button onClick={handleLogout} className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-      <MdLogout className="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" onClick={handleLogout}>LogOut</MdLogout>
-      <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">LogOut</span>
+    <button onClick={handleLogout} className="inline-flex flex-col items-center justify-center px-5 hover:bg-slate-50 dark:hover:bg-slate-800 group">
+      <MdLogout className="w-5 h-5 mb-2 text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" onClick={handleLogout}>LogOut</MdLogout>
+      <span className="text-sm text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">LogOut</span>
     </button>
   );
 }

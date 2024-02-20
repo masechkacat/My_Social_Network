@@ -35,3 +35,11 @@ export const updateUser = createAsyncOperation({
   },
 });
 
+export const fetchUserById = createAsyncOperation({
+  type: 'user/fetchById',
+  operation: async (userId) => {
+    const api = createAPI();
+    return api.get(`/users/${userId}`);
+  },
+});
+

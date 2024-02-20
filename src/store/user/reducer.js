@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, loginUser, fetchCurrentUser, updateUser } from './actions';
+import { registerUser, loginUser, fetchCurrentUser, updateUser, fetchUserById } from './actions';
 import { getToken } from '../../service/token';
 
 // Вспомогательные функции для обработки состояний
@@ -11,8 +11,21 @@ const handlePending = (state) => {
 const handleFulfilled = (state, action) => {
   console.log('Данные пользователя получены: ', action.payload);
   state.isLoading = false;
+  state.data = action.payload.user;
+  state.token = action.payload.jwt || state.token; // Обновляем токен, если он есть в ответе
+};
+
+const handleCurrentUserFulfilled = (state, action) => {
+  console.log('Данные текущего пользователя получены: ', action.payload);
+  state.isLoading = false;
   state.data = action.payload;
   state.token = action.payload.jwt || state.token; // Обновляем токен, если он есть в ответе
+};
+
+const handleViewedUserFulfilled = (state, action) => {
+  console.log('Данные просматриваемого пользователя получены: ', action.payload);
+  state.isLoading = false;
+  state.viewedProfile = action.payload;
 };
 
 const handleRejected = (state, action) => {
@@ -26,6 +39,7 @@ const userSlice = createSlice({
     isLoading: false,
     error: null,
     data: null,
+    viewedProfile: null,
     token: getToken() || null,
   },
   reducers: {
@@ -45,11 +59,14 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, handleFulfilled)
       .addCase(loginUser.rejected, handleRejected)
       .addCase(fetchCurrentUser.pending, handlePending)
-      .addCase(fetchCurrentUser.fulfilled, handleFulfilled)
+      .addCase(fetchCurrentUser.fulfilled, handleCurrentUserFulfilled)
       .addCase(fetchCurrentUser.rejected, handleRejected)
       .addCase(updateUser.pending, handlePending)
       .addCase(updateUser.fulfilled, handleFulfilled)
-      .addCase(updateUser.rejected, handleRejected);
+      .addCase(updateUser.rejected, handleRejected)
+      .addCase(fetchUserById.pending, handlePending)
+      .addCase(fetchUserById.fulfilled, handleViewedUserFulfilled)
+      .addCase(fetchUserById.rejected, handleRejected);
       // Можно добавить другие экшены, используя те же обработчики
   },
 });

@@ -35,7 +35,7 @@ const postSlice = createSlice({
       .addCase(deletePost.pending, handlePending)
       .addCase(deletePost.fulfilled, handleFulfilled)
       .addCase(deletePost.rejected, handleRejected);
-  },
+},
 });
 
 export const postReducer = postSlice.reducer;

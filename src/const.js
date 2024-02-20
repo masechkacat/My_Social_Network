@@ -5,4 +5,5 @@ export const AppRoute = {
   Profile: '/profile',
   Posts: '/posts',
   NotFound: '/*',
+  ProfileById: '/profile/:userId',
 };
